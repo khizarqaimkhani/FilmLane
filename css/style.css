@@ -745,9 +745,10 @@ footer .footer-top{
         flex-direction: column;
     }
 }
+
 @media only screen and (max-width: 767px){
     .upcoming-movie .wrapper .movie-carousel{
-        grid-auto-columns: calc((100% / 2) - 15px);
+        grid-auto-columns: calc((100% / 2) - 10px);
     }
     .same .wrapper{
         grid-template-columns: repeat(2, 1fr);
@@ -760,16 +761,24 @@ footer .footer-top{
         justify-content: center;
     }
 }
+
 @media only screen and (max-width: 549px){
-    .hero .content h1{
-        font-size: 36px;
-    }
-    .upcoming-movie .header .subtitle h4,.service .content h4,.top-movie .header h4,.tv-series .header h4{
-        font-size: 32px;
-    }
+    /* Mobile carousel fix start */
     .upcoming-movie .wrapper .movie-carousel{
-        grid-auto-columns: calc((100%) - 15px);
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 85%; /* thoda chhota karke proper fit */
+        gap: 15px; /* space between cards */
+        overflow-x: auto; /* allow horizontal scroll */
+        scroll-snap-type: x mandatory; /* smooth snap */
+        padding-bottom: 10px; /* optional padding */
+        -webkit-overflow-scrolling: touch; /* smooth on iOS */
     }
+    .upcoming-movie .wrapper .movie-carousel > * {
+        scroll-snap-align: start;
+    }
+    /* Mobile carousel fix end */
+
     .same .wrapper{
         grid-template-columns: repeat(1, 1fr);
     }
@@ -780,12 +789,23 @@ footer .footer-top{
         flex-direction: column;
         align-items: flex-start!important;
     }
+    .hero .content h1{
+        font-size: 36px;
+    }
+    .upcoming-movie .header .subtitle h4,
+    .service .content h4,
+    .top-movie .header h4,
+    .tv-series .header h4{
+        font-size: 32px;
+    }
 }
+
 @media only screen and (max-width: 450px){
     .trial .form .input{
         width: 350px;
     }
 }
+
 @media (min-width: 1200px){
     .upcoming-movie .wrapper .movie-carousel{
         grid-auto-columns: calc((100%/4) - 15px);
@@ -793,5 +813,4 @@ footer .footer-top{
     .same .wrapper{
         grid-template-columns: repeat(4, 1fr);
     }
-    
 }
